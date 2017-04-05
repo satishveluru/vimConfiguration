@@ -1,0 +1,7 @@
+!! - last execution
+!^ - first argument
+!$ - last argument
+!cp -execute las cp command
+!sh - last shell execution
+
+1 followed by ctrl+g to see full path
