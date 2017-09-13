@@ -42,15 +42,14 @@ Execute a sequence of changes 		qx{changes}q 		@x 	u
 :%s/content/copy/g
 
 *************** Be Lazy: search without Typing
-cw 	- command deletes to the end of the word
+cw 	command deletes to the end of the word
 
 Keystrokes Buffer Contents
-
-{start} 	    ...We're waiting for content before the site can go live...
-* 		        ...We're waiting for content before the site can go live...
+{start} 	...We're waiting for content before the site can go live...
+* 		...We're waiting for content before the site can go live...
 cwcopy<Esc> 	...We're waiting for content before the site can go live...
-n 		        ...We're waiting for content before the site can go live...
-. 		        ...We're waiting for copy before the site can go live...
+n 		...We're waiting for content before the site can go live...
+. 		...We're waiting for copy before the site can go live...
 
 
 ************Delete Forward ******
@@ -65,19 +64,22 @@ dl - delete character
 daw - delete a word.
 dap - dlete entire paragraph
 
-*********************** Extending vim's  *********************
+*********************** Extending vim's 
 \\{motion}
 \\ap - toggle commneting for the current paragraph.
 \\G comments to the end of line
 
-***** Autoindent ***************
+***** Autoindent 
 gg=G  -- to jump top and autoindent everytinh 
 \\ae would toggle commenting throughout the current file.
+
 
 ******************* Insert Mode ***************
 C-h	Delete back one character
 C-w	Delete back one work
 C-u 	Delete back to start of line
+
+
 
 ************ Duplicate the line and change it *************
 
@@ -86,3 +88,102 @@ cW.news<Esc> 		.blog, .news { background-image: url(/sprite.png); }
 180<C-x> 		.blog, .news { background-image: url(/sprite.png); }
 
 ********************* 
+
+<C-r>{register}  - command is convenient for pasting a few words 
+<C-r><C-p>{register} - command is smarter 
+<C-r>=. From Insert mode we can access it by typing 
+A 6 chairs, each costing $35, totals $
+<C-r>=6*35<CR> 6 chairs, each costing $35, totals $210
+
+
+
+************** Visual Mode  ********
+
+Command Effect
+v Enable character-wise Visual mode
+V Enable line-wise Visual mode
+<C-v> Enable block-wise Visual mode
+gv Reselect the last visual selection
+
+**************** Switching between Visual Modes
+
+Command Effect
+<Esc> / Switch to Normal mode
+<C-[>
+Switch to Normal mode (when used from character-, line- or
+block-wise Visual mode, respectively)
+v / V /
+<C-v>
+v Switch to character-wise Visual mode
+V Switch to line-wise Visual mode
+<C-v> Switch to block-wise Visual mode
+o Go to other end of highlighted text
+
+Repeat Line-Wise Visual Commands - 22
+
+Prefer Operators to Visual Commands Where Possible - 23
+
+Edit Tabular Data with Visual-Block Mode - 24
+
+Change Columns of Text - 25
+
+Append After a Ragged Visual Block - 
+
+Keystrokes Buffer Contents
+{start} var foo = 1
+	var bar = 'a'
+Normal mode var foobar = foo + bar
+
+<C-v>jj$ var foo = 1
+var bar = 'a'
+Visual-Block var foobar = foo + bar
+
+A; var foo = 1;
+var bar = 'a'
+
+Insert mode var foobar = foo + bar
+<Esc> var foo = 1;
+var bar = 'a';
+Normal mode var foobar = foo + bar;
+
+
+******** Recal lHistory ***********
+
+Ctrl-R -  To recall History 
+q:  	-Change the History of command line 
+q/ Open the command-line window with history of searches
+q: Open the command-line window with history of Ex commands
+ctrl-f Switch from Command-Line mode to the command-line window
+
+
+Run Commands in the Shell - 35
+:!ls
+:shell
+ls            -- 
+exit  -- kills the shell and returns to vim.
+
+Ctrl-z suspends the process that’s running Vim and returns control to bash.
+
+
+*************Using the contents of a buffer for standard Input or Output.***********
+
+:read !{cmd} command lets us direct standard output into a buffer.
+:write !{cmd} does the inverse
+
+
+ :write !sh
+ :write ! sh
+ :write! sh
+
+********** filtering the contents of a buffer throught External Command*******
+
+:!{cmd} command takes on a different meaning when it’s given a range
+
+ :2,$!sort -t',' -k2
+
+
+
+
+
+
+
