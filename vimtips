@@ -847,5 +847,10 @@ Note : Use <Up> and <Down> keys to navigate the list, <Enter> to select a match.
 
 2.  :lvim pattern %  To open the list :lopen
 
+################ Some of Vim tips
+:set shiftwidth=4
+
+
+
 
 
