@@ -1,11 +1,11 @@
-set wrap
-  2
-  3 " searched as characters are entered
-  4 set incsearch
-  5
-  6 " highlight matched
-  7 set hlsearch
-  8
+  set wrap
+  " searched as characters are entered
+  set incsearch
+  " highlight matched
+  set hlsearch
+ 
+  :set autoindent  -- in vim editor 
+  
   9 " enable syntax processing
  10 syntax enable
  11
