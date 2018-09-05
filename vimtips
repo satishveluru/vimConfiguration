@@ -1,0 +1,851 @@
+************** Interesting website encountered **********
+
+https://www.davidpashley.com/articles/writing-robust-shell-scripts/
+
+
+************** Vim Tutorial ******
+
+Prompt Meaning
+$ Enter the command line in an external shell
+: Use Command-Line mode to execute an Ex command
+/ Use Command-Line mode to perform a forward search
+? Use Command-Line mode to perform a backward search
+= Use Command-Line mode to evaluate a Vim script expression
+
+###################  Tip 1 : Meet the Dot Command
+
+.  	- repeat
+u 	- undo 
+dd 	- delete 
+>G	- indent 
+==	- format
+j,j.	- next line and indent ,repeat last action end of line 
+
+
+$a - End Insert 
+j$ - next line end 
+A- append end if current line 
+j. - repeat last action end of line 
+
+$, 0, and ^ to move to line endpoints and then use w and b. Also, adding a numeric argument to w and b can accelerate the process
+
+Note: Opening multiple files in VIM 
+
+:n -> Move to next file
+:N -> Move to previous file
+:h or :help --> then move to a word press - ctrl -] to jump to a Corresponding word or Ctrl-T to move back again to the original file.
+:bf            # Go to first file.
+:bl            # Go to last file
+:bn            # Go to next file.
+:bp            # Go to previous file.
+:bw            # Close file.
+
+
+
+###################  Tip 2 - Don’t Repeat Yourself - dot and ; commands
+
+A instead of $a;
+. 	- repeat 
+; 	- goto the same line when search
+;. 	- got the next execution and do repeat command.
+
+Two for the price of One : Compound Command Equivalent in Longhand
+
+C c$
+s cl
+S ^C
+I ^i
+A $a
+o A<CR>
+
+Note: Delete line or Word in command line 
+Ctrl+U -   Clear Up to the Beginning
+Ctrl+W -   delete a word backward
+Ctrl+K -   Delete a work forward
+Ctrl+Backspace - Undo
+Ctrl+A - goto the beginning
+Ctrl+Y - recall deleted command 
+Ctrl+L - To Clear entire command prompt 
+
+Ctrl+ XX - Toggle bewteen start of line and current cursor.
+
+Note: Useful link - https://www.cs.swarthmore.edu/help/vim/makefiles.html
+
+
+###################  Tip 3 - Take One Step Back, Then Three Forward
+
+Open file with search pattern : 
+
+vi +/searchterm filename
+
+f{char} - search a character while in VIM
+; - repeat the same search
+
+
+Note: Search
+
+For basic searching:
+
+/pattern       - search forward for pattern
+?pattern       - search backward
+n              - repeat forward search
+N              - repeat backward
+
+Some variables you might want to set:
+
+:set ignorecase - case insensitive
+:set smartcase  - use case if any caps used 
+:set incsearch  - show match as search proceeds
+:set hlsearch   - search highlighting
+
+More cool searching tricks:
+
+*               - search for word currently under cursor
+g*              - search for partial word under cursor 
+                  (repeat with n)
+ctrl-o, ctrl-i  - go through jump locations
+[I              - show lines with matching word under cursor
+
+Search and replace
+
+:%s/search_for_this/replace_with_this/    - search whole file and replace
+:%s/search_for_this/replace_with_this/c   - confirm each replace
+
+
+
+###################  Tip 4- Act ,Repeat,Reverse
+
+
+Intent 					Act 		Repeat 		Reverse
+Make a change 				{edit} 			. 	u
+Scan line for next character 		f{char}/t{char} 	; 	,
+Scan line for previous character 	F{char}/T{char} 	; 	,
+Scan document for next match 		/pattern<CR> 		n 	N
+Scan document for previous match 	?pattern<CR> 		n 	N
+Perform substitution 			:s/target/replacement 	& 	u
+Execute a sequence of changes 		qx{changes}q 		@x 	u
+
+
+
+Tip-5 Find and Replace by Hand
+******************************
+
+:%s/content/copy/g
+
+Be Lazy: Search Without Typing
+
+cw 	command deletes to the end of the word
+
+Keystrokes
+{start} 	...We're waiting for content before the site can go live...
+* 		...We're waiting for content before the site can go live...
+cwcopy<Esc> 	...We're waiting for content before the site can go live...
+n 		...We're waiting for content before the site can go live...
+. 		...We're waiting for copy before the site can go live...
+
+
+************Delete Forward ******
+
+dbx, bdw, and daw.
+
+d2w and 2dw will delete two words.
+
+d{motion},c{motion},y{motion}
+
+dl - delete character
+daw - delete a word.
+dap - dlete entire paragraph
+
+*********************** Extending vim's 
+\\{motion}
+\\ap - toggle commneting for the current paragraph.
+\\G comments to the end of line
+
+***** Autoindent 
+gg=G  -- to jump top and autoindent everytinh 
+\\ae would toggle commenting throughout the current file.
+
+
+******************* Insert Mode ***************
+C-h	Delete back one character
+C-w	Delete back one work
+C-u 	Delete back to start of line
+
+
+
+************ Duplicate the line and change it *************
+
+yyp 			.blog, .news { background-image: url(/sprite.png); }
+cW.news<Esc> 		.blog, .news { background-image: url(/sprite.png); }
+180<C-x> 		.blog, .news { background-image: url(/sprite.png); }
+
+********************* 
+
+<C-r>{register}  - command is convenient for pasting a few words 
+<C-r><C-p>{register} - command is smarter 
+<C-r>=. From Insert mode we can access it by typing 
+A 6 chairs, each costing $35, totals $
+<C-r>=6*35<CR> 6 chairs, each costing $35, totals $210
+
+
+
+************** Visual Mode  ********
+
+Command Effect
+v Enable character-wise Visual mode
+V Enable line-wise Visual mode
+<C-v> Enable block-wise Visual mode
+gv Reselect the last visual selection
+
+**************** Switching between Visual Modes
+
+Command Effect
+<Esc> / Switch to Normal mode
+<C-[>
+Switch to Normal mode (when used from character-, line- or
+block-wise Visual mode, respectively)
+v / V /
+<C-v>
+v Switch to character-wise Visual mode
+V Switch to line-wise Visual mode
+<C-v> Switch to block-wise Visual mode
+o Go to other end of highlighted text
+
+Repeat Line-Wise Visual Commands - 22
+
+Prefer Operators to Visual Commands Where Possible - 23
+
+Edit Tabular Data with Visual-Block Mode - 24
+
+Change Columns of Text - 25
+
+Append After a Ragged Visual Block - 
+
+Keystrokes Buffer Contents
+{start} var foo = 1
+	var bar = 'a'
+Normal mode var foobar = foo + bar
+
+<C-v>jj$ var foo = 1
+var bar = 'a'
+Visual-Block var foobar = foo + bar
+
+A; var foo = 1;
+var bar = 'a'
+
+Insert mode var foobar = foo + bar
+<Esc> var foo = 1;
+var bar = 'a';
+Normal mode var foobar = foo + bar;
+
+
+******** Recal lHistory ***********
+
+Ctrl-R -  To recall History 
+q:  	-Change the History of command line 
+q/ Open the command-line window with history of searches
+q: Open the command-line window with history of Ex commands
+ctrl-f Switch from Command-Line mode to the command-line window
+
+
+Run Commands in the Shell - 35
+:!ls
+:shell
+ls            -- 
+exit  -- kills the shell and returns to vim.
+
+Ctrl-z suspends the process that’s running Vim and returns control to bash.
+
+
+*************Using the contents of a buffer for standard Input or Output.***********
+
+:read !{cmd} command lets us direct standard output into a buffer.
+:write !{cmd} does the inverse
+
+
+ :write !sh
+ :write ! sh
+ :write! sh
+
+********** filtering the contents of a buffer throught External Command*******
+
+:!{cmd} command takes on a different meaning when it’s given a range
+
+ :2,$!sort -t',' -k2
+
+
+Command Effect
+:shell 				Start a shell (return to Vim by typing exit)
+:!{cmd} 			Execute {cmd} with the shell
+:read !{cmd}			Execute {cmd} in the shell and insert its standard output
+				below the cursor
+
+:[range]write !{cmd}		Execute {cmd} in the shell with [range] lines as standard
+				input
+
+:[range]!{filter} 		Filter the specified [range] through external program {filter}
+
+
+***************** Files **********************
+36. Track Open Files with the Buffer List
+
+:ls - list
+:bnext - next 
+Toggle - CTRL-^
+:buffer N - N line Number 
+
+:bdelete N1 N2 N3
+:N,M bdelete
+
+
+
+:bufdo command allows us to execute an Ex comand.
+
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
+Command Effect
+<C-w>s 			Split the current window horizontally, reusing the current buffer in the new window
+			Split the current window vertically, reusing the current buffer in the new window
+<C-w>v 			Split the current window horizontally, loading {file} into the new window
+:sp[lit] {file}  	Split the current window vertically, loading {file} into the new window
+
+
+Changing the Focus Between Windows
+Command Effect
+<C-w>w Cycle between open windows
+<C-w>h Focus the window to the left
+<C-w>j Focus the window below
+<C-w>k Focus the window above
+<C-w>l Focus the window to the right
+
+Ex Command Normal Command Effect
+
+:cl[ose] <C-w>c Close the active window
+
+:on[ly] <C-w>o Keep only the active window, closing all others
+
+
+Keystrokes Buffer Contents
+
+<C-w>= 			Equalize width and height of all windows
+<C-w>_ 			Maximize height of the active window
+<C-w>| 			Maximize width of the active window
+[N]<C-w>_ 		Set active window height to [N] rows
+[N]<C-w>| 		Set active window width to [N] columns
+
+
+
+Command Effect
+:tabe[dit] {filename} 		Open {filename} in a new tab
+<C-w>T 				Move the current window into its own tab
+:tabc[lose] 			Close the current tab page and all of its windows
+:tabo[nly] 			Keep the active tab page, closing all others
+
+
+Ex Command Normal Command Effect
+:tabn[ext] {N} 	{N}gt 	Switch to tab page number {N}
+:tabn[ext] gt 		Switch to the next tab page
+:tabp[revious] gT 	Switch to the previous tab page
+
+
+Open a File by Its Filepath Using ‘:edit’ - 41
+
+:edit lib/framework.js
+
+:edit %<Tab>
+
+:edit %:h<Tab>      -- shorthand for the filepath of the active buffer
+
+:edit %:h<Tab>M<Tab>
+
+Easy Expansion of the Active File Directory :
+
+Try sourcing this line in your vimrc file:
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+
+Open a File by Its Filename Using ‘:find’ Tip -42 
+
+Configure path :
+:set path+=app/**
+
+
+Explore the File System with netrw    Tip -43
+
+set nocompatible
+filetype plugin on
+
+
+Saving files to non existent Directories
+****************************************
+
+:edit madeup/dir/doesnotexist.yet
+:write
+
+:!mkdir -p %:h
+:write
+
+
+Save a File as the Super User 
+
+$ ls -al /etc/ | grep hosts
+
+$ whoami
+
+$ vim /etc/hosts
+
+:write
+
+:write!
+
+:w !sudo tee % > /dev/null
+
+
+Keep Your Fingers on the Home Row 
+*********************************
+j 	Down one real line
+gj 	Down one display line
+k 	Up one real line
+gk 	Up one display line
+0 	To first character of real line
+g0 	To first character of display line
+^ 	To first nonblank character of real line
+g^ 	To first nonblank character of display line
+$ 	To end of real line
+g$ 	To end of display line
+
+
+Note the pattern: j, k, 0, and $ all interact with real
+
+
+Move Word-Wise 
+
+Command Move Cursor
+
+w 		Forward to start of next word
+b 		Backward to start of current/previous word
+e 		Forward to end of current/next word
+ge 		Backward to end of previous word
+
+
+Keystrokes Buffer Contents
+
+{start} 		Go fast.
+eaer<Esc> 		Go faster.
+
+Keystrokes Buffer Contents
+{start} 	e.g. we're going too slow
+W e.g. 		we're going too slow
+W e.g. 		we're going too slow
+
+
+Keystrokes Buffer Contents
+{start} e.g. we're going too slow
+cwyou<Esc> e.g. you're going too slow
+
+
+
+Keystrokes Buffer Contents
+{start} e.g. we're going too slow
+cWit's<Esc> e.g. it's going too slow
+
+
+Find by Character - 49
+*******************************
+Keystrokes Buffer Contents
+{start} 	Find the first occurrence of {char} and move to it.
+fx 		Find the first occurrence of {char} and move to it.
+fo 		Find the first occurrence of {char} and move to it.
+
+Keystrokes Buffer Contents
+
+{start} 		Find the first occurrence of {char} and move to it.
+fc 			Find the first occurrence of {char} and move to it.
+; 			Find the first occurrence of {char} and move to it.
+; 			Find the first occurrence of {char} and move to it.
+; 			Find the first occurrence of {char} and move to it.
+
+Keystrokes Buffer Contents
+{start} 		Find the first occurrence of {char} and move to it.
+fo 			Find the first occurrence of {char} and move to it.
+;;			Find the first occurrence of {char} and move to it.
+, 			Find the first occurrence of {char} and move to it.
+
+
+Keystrokes Buffer Contents
+{start} 	I've been expecting you, Mister Bond.
+f, 		I've been expecting you, Mister Bond.
+dt. 		I've been expecting you.
+
+
+Think Like a Scrabble
+Search to Navigate
+
+
+
+
+v 		This phrase takes time but
+		eventually gets to the point.
+/ge<CR> 	This phrase takes time but eventually gets to the point.
+h 		This phrase takes time but eventually gets to the point.
+d 		This phrase gets to the point.
+
+
+
+Trace Your Selection with Precision Text Objects
+
+var tpl = [
+'<a href="{url}">{title}</a>'
+]
+
+
+Text Object Selection
+a) or ab A pair of (parentheses)
+i) or ib Inside of (parentheses)
+a} or aB A pair of {braces}
+i} or iB Inside of {braces}
+a] A pair of [brackets]
+i] Inside of [brackets]
+a> A pair of <angle brackets>
+i> Inside of <angle brackets>
+a’ A pair of 'single quotes'
+i’ Inside of 'single quotes'
+a" A pair of "double quotes"
+i" Inside of "double quotes"
+a` A pair of `backticks`
+i` Inside of `backticks`
+at A pair of <xml>tags</xml>
+it Inside of <xml>tags</xml>
+
+Delete around a or change inside 
+
+
+iw Current word
+aw Current word plus one space
+iW Current WORD
+aW Current WORD plus one space
+is Current sentence
+as Current sentence plus one space
+ip Current paragraph
+ap Current paragraph plus one blank line
+
+Keystrokes Buffer Contents
+{start} 		Improve your writing by deleting excellent adjectives.
+daw 			Improve your writing by deleting adjectives.
+
+{start} 		Improve your writing by deleting excellent adjectives.
+ciwmost<Esc> 		Improve your writing by deleting most adjectives.
+
+`` 	Position before the last jump within current file
+`. 	Location of last change
+`^ 	Location of last insertion
+`[ 	Start of last change or yank
+`] 	End of last change or yank
+`< 	Start of last visual selection
+`> 	End of last visual selection
+
+Jump Between Matching Parentheses - tip 54 
+
+{start} console.log([{'a':1},{'b':2}])
+% console.log([{'a':1},{'b':2}])
+h console.log([{'a':1},{'b':2}])
+% console.log([{'a':1},{'b':2}])
+l console.log([{'a':1},{'b':2}])
+% console.log([{'a':1},{'b':2}])
+
+cities = %w{London Berlin New\ York}
+
+
+{start} cities = %w{London Berlin New\ York}
+dt{ cities = {London Berlin New\ York}
+% cities = {London Berlin New\ York}
+r] cities = {London Berlin New\ York]
+`` cities = {London Berlin New\ York]
+r[ cities = [London Berlin New\ York]
+
+set nocompatible
+filetype plugin on
+runtime macros/matchit.vim
+
+
+Surround VIm;
+*************
+
+{start} cities = ["London", "Berlin", New York]
+vee cities = ["London", "Berlin", New York]
+S" cities = ["London", "Berlin", "New York"]
+
+
+Traverse the Jump List - 
+
+:jumps
+
+[count]G 				Jump to line number
+//pattern<CR>/?pattern<CR>/n/N 		Jump to next/previous occurrence of pattern
+% 					Jump to matching parenthesis
+(/) 					Jump to start of previous/next sentence
+{/} 					Jump to start of previous/next paragraph
+H/M/L 					Jump to top/middle/bottom of screen
+gf 					Jump to file name under the cursor
+<C-]> 					Jump to definition of keyword under the cursor
+’{mark}/`{mark} 			Jump to a mark
+
+
+Traverse the Change List
+
+:changes
+
+Using the g; and g, commands, we can traverse backward and forward through the change list
+
+
+The `. mark always references the position of the last change
+
+`^ mark tracks the position of the cursor the last time that Insert  mode was stopped 
+
+The `., on the other hand, will always take us to the last item in the change list.
+
+
+Jump to the Filename Under the Cursor  - 57  
+**************************************
+
+
+vim -u NONE -N practical_vim.rb
+
+
+:set suffixesadd+=.rb
+
+:set path?
+
+path=.,/usr/include,,
+
+:vimgrep /fooBar/ **
+
+
+Snap Between Files Using Global Marks
+*********************************
+A global mark is a kind of bookmark that allows us to jump between files.
+
+Global marks can be especially useful when we need to browse through a set of files and then quickly snap back to where we started.
+
+:vimgrep /fooBar/ **
+
+we can use the <C-o> command to get back to where we were prior to running :vimgrep.
+
+mM command before invoking :vimgrep
+
+snap back in one move with the `M command
+
+Delete, Yank, and Put with Vim’s Unnamed Register -59 
+**********************************************************
+F Practica lvim
+x Practicalvim
+p Practical vim
+
+start} 2) line two
+	1) line one
+	3) line three
+dd 	1) line one
+	3) line three
+p 	1) line one
+	2) line two
+	3) line three
+
+Duplicating Lines
+*******************
+yyp 	1) line one
+	2) line two
+	2) line two
+
+
+collection = getCollection();
+
+process(somethingInTheWay, target);
+
+
+
+yiw 		collection = getCollection();
+		process(somethingInTheWay, target);
+jww 		collection = getCollection();
+		process(somethingInTheWay, target);
+diw 		collection = getCollection();
+		process(, target);
+P 		collection = getCollection();
+		process(somethingInTheWay, target);
+
+Grok Vim’s Registers
+
+
+Keystrokes Buffer Contents
+yiw collection = getCollection();
+process(somethingInTheWay, target);
+jww collection = getCollection();
+process(somethingInTheWay, target);
+diw collection = getCollection();
+process(, target);
+"0P collection = getCollection();
+process(collection, target);
+
+:reg "0
+--- Registers ---
+"" somethingInTheWay
+"0 collection
+
+
+
+"ayiw collection = getCollection();
+process(somethingInTheWay, target);
+jww collection = getCollection();
+process(somethingInTheWay, target);
+diw collection = getCollection();
+process(, target);
+"aP collection = getCollection();
+
+************************ 
+
+yiw 	collection = getCollection();
+	process(somethingInTheWay, target);
+jww 	collection = getCollection();
+	process(somethingInTheWay, target);
+"_diw 	collection = getCollection();
+	process(, target);
+P 	collection = getCollection();
+	process(collection, target);
+
+
+
+
+
+"% Name of the current file
+"# Name of the alternate file
+". Last inserted text
+": Last Ex command
+"/ Last search pattern
+
+
+yiw collection = getCollection();
+process(somethingInTheWay, target);
+jww collection = getCollection();
+process(somethingInTheWay, target);
+ve collection = getCollection();
+process(somethingInTheWay, target);
+p collection = getCollection();
+process(collection, target);
+
+
+
+
+
+{start} I like chips and fish.
+fc I like chips and fish.
+de I like and fish.
+mm I like and fish.
+ww I like and fish.
+ve I like and fish.
+p I like and chips.
+`m I like and chips.
+P I like fish and chips.
+
+
+
+yiw collection = getCollection();
+process(somethingInTheWay, target);
+jww collection = getCollection();
+process(somethingInTheWay, target);
+ciw<C-r>0<Esc> collection = getCollection();
+process(collection, target);
+
+
+
+$ vim -u NONE -N
+
+
+:set autoindent
+
+
+[1,2,3,4,5,6,7,8,9,10].each do |n|
+if n%5==0
+puts "fizz"
+else
+puts n
+end
+end
+
+
+Normalize, Strike, Abort  - 65 
+
+Play Back with a Count - 66
+
+
+{start} x = "("+a+","+b+","+c+","+d+","+e+")";
+f+ x = "("+a+","+b+","+c+","+d+","+e+")";
+s + <Esc> x = "(" + a+","+b+","+c+","+d+","+e+")";
+qq;.q x = "(" + a + ","+b+","+c+","+d+","+e+")";
+22@q x = "(" + a + "," + b + "," + c + "," + d + "," + e + ")";
+
+
+
+
+command repeats the f+ search.
+
+
+{start} x = "("+a+","+b+","+c+","+d+","+e+")";
+f+ x = "("+a+","+b+","+c+","+d+","+e+")";
+s + <Esc> x = "(" + a+","+b+","+c+","+d+","+e+")";
+qq;.q x = "(" + a + ","+b+","+c+","+d+","+e+")";
+22@q x = "(" + a + "," + b + "," + c + "," + d + "," + e + ")";
+
+
+
+
+Keystrokes Buffer Contents
+qa 1. one
+2. two
+0f. 1. one
+2. two
+r) 1) one
+2. two
+w~ 1) One
+2. two
+j 1) One
+2. two
+q 1) One
+2. two
+
+
+
+
+Tip -67 Repeat a Change on Contiguous Lines
+
+
+
+Tip-69 Act Upon a Collection of Files
+
+
+
+Tip -70 Evaluate an Iterator to Number Items in a List
+
+
+
+Tips At Command line -
+***************************************************
+
+test -f ~/.git-completion.bash && . $_
+
+Note: $_ means the last argument to the previous command. so . $_ means run it - "it" being .git-completion.bash in this case
+
+
+
+
+vim: list all matching lines
+
+1. :vimgrep pattern %  --> To open the list of matches in a buffer: :copen
+
+Note : Use <Up> and <Down> keys to navigate the list, <Enter> to select a match. Traverse the matches in the open file using <n> and <N> the regular way.
+
+2.  :lvim pattern %  To open the list :lopen
+
+
+
