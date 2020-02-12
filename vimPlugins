@@ -18,3 +18,44 @@ vim-snippets :          Vim-snipmate default snippets (Previously snipmate-snipp
 commentary.vim :        Commentary.vim: comment stuff out
 ale               :     Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
 Tabular           :     Vim script for text filtering and alignment
+
+
+########### Installations #######
+
+# Pathogen
+mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+ 
+#NERDTree  
+1. Create a ".vimrc" file and insert the following text and save it .
+ 
+      execute pathogen#infect()
+      syntax on
+      filetype plugin indent on
+
+      let g:NERDTreeDirArrows=0
+      let NERDTreeShowHidden=1
+
+      2. Get int the file ".vimrc" and execute
+      a. <Press ESC>
+      b. :source ~/.vimrc
+      c. wq
+
+      3. $ cd ~/.vim
+      4. $ mkdir bundle
+      5. git clone https://github.com/scrooloose/nerdtree.git
+      6. :NERDTree
+
+#Fugitive VIM
+
+      mkdir -p ~/.vim/fugitive && cd ~/.vim/fugitive
+      git clone https://tpope.io/vim/fugitive.git
+      vim -u NONE -c "helptags fugitive/doc" -c q
+
+
+# AIR-LINE
+      cd ~/.vim/bundle
+      git clone https://github.com/bling/vim-airline
+      ## IN Vimrc
+      set laststatus=2 #load up as soon as you start editing a file
+      set noshowmode  #line to hide the default mode (INSERT, NORMAL, etc)
+      set t_Co=256 # line to get colors working correctl
