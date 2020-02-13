@@ -5,6 +5,8 @@ let mapleader=" "
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/goyo.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-syntastic/syntastic'
 call plug#end()
  
 " Some basics
@@ -175,5 +177,8 @@ let g:syntastic_check_on_wq = 0
 "set laststatus=2 "load up as soon as you start editing a file
 "set noshowmode   "line to hide the default mode (INSERT, NORMAL, etc)
 "set t_Co=256   "line to get colors working correctl
+
+"Airline
+let g:airline_powerline_fonts = 1
 
 
