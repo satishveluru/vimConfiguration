@@ -1,6 +1,7 @@
 "" Information copied from                                      
 " https://github.com/mcantor/no_plugins/blob/master/no_plugins.v
 
+let mapleader=" "
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/goyo.vim'
@@ -12,7 +13,8 @@ syntax on
 set encoding=utf-8
 set number relativenumber
 
-
+" goyo plugin makes text more readable
+map <leader>f :Goyo \| set linebreak<CR>
  
 " Spell-checking 
 
@@ -33,7 +35,7 @@ set path+=**
 set wildmenu                                                    
                                                                 
 " :b lets you autocomplete any open buffer  
-set wildmode=longest.list.full
+set wildmode=longest,list,full
 
                                                                 
 " find all files within PATH                                    
@@ -89,7 +91,10 @@ set smartcase
 if $COLORTERM == 'gnome-terminal'                                                                   
     set t_Co=256                                                                                    
 endif                                                                                               
-                                                                                                    
+
+"check file in spel check 
+map <leader>s :!clear && shellcheck %<CR>
+
                                                                                                     
 "awesome colorscheme                                                                                
                                                                                                     
