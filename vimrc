@@ -1,6 +1,18 @@
 "" Information copied from                                      
 " https://github.com/mcantor/no_plugins/blob/master/no_plugins.v
-                                                                
+
+
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/goyo.vim'
+call plug#end()
+ 
+" Some basics
+filetype plugin on 
+syntax on
+set encoding=utf-8
+set number relativenumber
+
+
  
 " Spell-checking 
 
@@ -20,7 +32,9 @@ set path+=**
 "Display all matching files when we tab complete                
 set wildmenu                                                    
                                                                 
-" :b lets you autocomplete any open buffer                      
+" :b lets you autocomplete any open buffer  
+set wildmode=longest.list.full
+
                                                                 
 " find all files within PATH                                    
                                                                 
