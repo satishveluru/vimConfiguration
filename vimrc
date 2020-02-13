@@ -20,6 +20,10 @@ set number relativenumber
 " goyo plugin makes text more readable
 map <leader>f :Goyo \| set linebreak<CR>
  
+" To Copy/Paster : "<Letter>y/p or "+y/p
+vnoremap <C-c> "+y
+map <C-p> "+p
+ 
 " Spell-checking 
 
 "Display all comments in color instead dark-blue                
